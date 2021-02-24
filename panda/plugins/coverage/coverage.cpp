@@ -257,5 +257,7 @@ bool init_plugin(void *self)
 
 void uninit_plugin(void *self)
 {
+    extern bool panda_please_flush_tb;
+    panda_please_flush_tb = true;
     inst_dels.clear();
 }
