@@ -268,6 +268,8 @@ def compile(arch, bits, pypanda_headers, install, static_inc):
     define_clean_header(ffi, include_dir + "/hooks2_ppp.h")
 
     define_clean_header(ffi, include_dir + "/stringsearch_ppp.h")
+
+    define_clean_header(ffi, include_dir + "/forcedexec_ppp.h")
     # END PPP headers
 
     define_clean_header(ffi, include_dir + "/breakpoints.h")
@@ -328,8 +330,10 @@ def main(install=False,recompile=True):
     copy_ppp_header("%s/%s" % (PLUGINS_DIR+"/osi", "os_intro.h"))
     pypanda_headers.append(os.path.join(INCLUDE_DIR_PYP, "os_intro.h"))
 
-    copy_ppp_header("%s/%s" % (PLUGINS_DIR+"/hooks2", "hooks2_ppp.h"))
+    # TODO: programtically copy anything that ends with _ppp.h
+    copy_ppp_header("%s/%s" % (PLUGINS_DIR+"/hooks2",       "hooks2_ppp.h"))
     copy_ppp_header("%s/%s" % (PLUGINS_DIR+"/stringsearch", "stringsearch_ppp.h"))
+    copy_ppp_header("%s/%s" % (PLUGINS_DIR+"/forcedexec",   "forcedexec_ppp.h"))
     create_pypanda_header("%s/%s" % (PLUGINS_DIR+"/hooks2", "hooks2.h"))
 
     with open(os.path.join(OUTPUT_DIR, "panda_datatypes.py"), "w") as pdty:
